@@ -3,7 +3,7 @@
     "path": "~/Documents/Code/R Studio/JG Website/Website/_quarto.yml",
     "project_path": "_quarto.yml",
     "type": "yaml",
-    "hash": "1928244810",
+    "hash": "3342277322",
     "contents": "",
     "dirty": false,
     "created": 1794050901457.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "21,41",
-        "scrollLine": "9"
+        "cursorPosition": "2,19",
+        "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1794082372,
+    "lastKnownWriteTime": 1794084745,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1794082372141,
+    "last_content_update": 1794084745014,
     "read_only": false,
     "read_only_alternatives": []
 }
