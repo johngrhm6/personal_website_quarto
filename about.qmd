@@ -1,0 +1,37 @@
+---
+title: "About"
+page-layout: full
+---
+
+
+## Background
+
+I work with data, statistical analysis and
+technology, with an interest in applying
+analytical methods to real-world problems.
+
+## Technical interests
+
+- Statistical analysis and modelling
+- R programming and data science
+- Data visualisation and communication
+- Machine learning and predictive analytics
+- Graph analytics and network science
+- Data engineering and reporting
+
+## Technologies
+
+| Area | Technologies |
+|---|---|
+| Programming | R, Python, SQL |
+| Visualisation | ggplot2, Power BI |
+| Statistics | Statistical modelling, hypothesis testing |
+| Machine learning | scikit-learn, PyTorch Geometric |
+| Reporting | Quarto, R Markdown |
+| Databases | PostgreSQL, SQL Server, Neo4j |
+
+## Find me online
+
+[GitHub](https://github.com/YOUR-GITHUB-USERNAME)
+
+

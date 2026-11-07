@@ -1,0 +1,9 @@
+---
+title: "Projects"
+page-layout: full
+---
+
+### TidyTuesday
+
+[TidyTuesday](TidyTuesday.qmd){.btn .btn-outline-secondary}
+

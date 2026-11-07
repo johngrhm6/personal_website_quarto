@@ -1,0 +1,58 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Website",
+    "section": "",
+    "text": "Data, Statistics and Machine Learning\nDay to day analyst who enjoys visualisations and statiscal analysis in my spare time.\nGitHub"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "I work with data, statistical analysis and technology, with an interest in applying analytical methods to real-world problems."
+  },
+  {
+    "objectID": "projects.html",
+    "href": "projects.html",
+    "title": "Projects",
+    "section": "",
+    "text": "TidyTuesday\nTidyTuesday"
+  },
+  {
+    "objectID": "TidyTuesday.html",
+    "href": "TidyTuesday.html",
+    "title": "TidyTuesday",
+    "section": "",
+    "text": "```{r}\nlibrary(tidytuesdayR)\n\nlibrary(tidyverse)\n\ntt_data &lt;- tt_load(2026, week=2) \n\nafrica &lt;- tt_data$africa\n```\n\n\n```{r}\nafrica |&gt; \n  group_by(country) |&gt; \n  summarise(n=n_distinct(language)) |&gt; \n  ggplot(aes(x=reorder(country,-n),y=n))+\n  geom_col()+\n  theme_minimal()+\n  theme(\n    axis.title.x = element_blank(),\n    axis.title.y = element_blank(),\n    plot.background = element_blank(),\n    panel.grid = element_blank(),\n    axis.text.x = element_text(angle = 90)\n  )\n```"
+  },
+  {
+    "objectID": "about.html#background",
+    "href": "about.html#background",
+    "title": "About",
+    "section": "",
+    "text": "I work with data, statistical analysis and technology, with an interest in applying analytical methods to real-world problems."
+  },
+  {
+    "objectID": "about.html#technical-interests",
+    "href": "about.html#technical-interests",
+    "title": "About",
+    "section": "Technical interests",
+    "text": "Technical interests\n\nStatistical analysis and modelling\nR programming and data science\nData visualisation and communication\nMachine learning and predictive analytics\nGraph analytics and network science\nData engineering and reporting"
+  },
+  {
+    "objectID": "about.html#technologies",
+    "href": "about.html#technologies",
+    "title": "About",
+    "section": "Technologies",
+    "text": "Technologies\n\n\n\nArea\nTechnologies\n\n\n\n\nProgramming\nR, Python, SQL\n\n\nVisualisation\nggplot2, Power BI\n\n\nStatistics\nStatistical modelling, hypothesis testing\n\n\nMachine learning\nscikit-learn, PyTorch Geometric\n\n\nReporting\nQuarto, R Markdown\n\n\nDatabases\nPostgreSQL, SQL Server, Neo4j"
+  },
+  {
+    "objectID": "about.html#find-me-online",
+    "href": "about.html#find-me-online",
+    "title": "About",
+    "section": "Find me online",
+    "text": "Find me online\nGitHub"
+  }
+]

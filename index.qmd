@@ -1,0 +1,13 @@
+---
+title: "Website"
+page-layout: full
+---
+
+::: {.hero}
+# Data, Statistics and Machine Learning
+
+Day to day analyst who enjoys visualisations and statiscal analysis in my spare time.
+
+[GitHub](https://github.com/johngrhm6){.btn .btn-outline-secondary}
+
+

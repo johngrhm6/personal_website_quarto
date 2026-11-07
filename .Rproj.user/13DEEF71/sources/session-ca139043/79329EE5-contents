@@ -1,0 +1,107 @@
+/* css styles */
+
+/* ----------------------------------
+   Global settings
+---------------------------------- */
+
+:root {
+  --navy: #001219;
+  --teal: #005F73;
+  --mint: #94D2BD;
+  --background: #F8FAFA;
+  --text: #263238;
+  --muted: #64748B;
+}
+
+/* ----------------------------------
+   Typography and body
+---------------------------------- */
+
+body {
+  background-color: var(--background);
+  color: var(--text);
+  font-family: "Inter", sans-serif;
+  line-height: 1.7;
+}
+
+h1, h2, h3, h4 {
+  color: var(--navy);
+  font-weight: 650;
+  letter-spacing: -0.03em;
+}
+
+/* ----------------------------------
+   Navigation
+---------------------------------- */
+
+.navbar {
+  border-bottom: 1px solid #e5eaea;
+}
+
+.navbar .navbar-brand {
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+/* ----------------------------------
+   Links
+---------------------------------- */
+
+a {
+  color: var(--teal);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--navy);
+}
+
+/* ----------------------------------
+   Homepage hero
+---------------------------------- */
+
+.hero {
+  max-width: 850px;
+  margin: 70px auto 90px;
+  padding: 30px 20px;
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  line-height: 1.1;
+  margin-bottom: 25px;
+}
+
+.hero p {
+  font-size: 1.15rem;
+  color: var(--muted);
+  max-width: 680px;
+}
+
+/* ----------------------------------
+   Buttons
+---------------------------------- */
+
+.btn-primary {
+  background-color: var(--teal);
+  border-color: var(--teal);
+}
+
+.btn-primary:hover {
+  background-color: var(--navy);
+  border-color: var(--navy);
+}
+
+/* ----------------------------------
+   Content
+---------------------------------- */
+
+#quarto-content {
+  padding-top: 25px;
+}
+
+h2 {
+  margin-top: 2.5rem;
+  margin-bottom: 1.2rem;
+}
+
