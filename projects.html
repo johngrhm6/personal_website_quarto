@@ -152,11 +152,22 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="tidytuesday" class="level3">
-<h3 class="anchored" data-anchor-id="tidytuesday">TidyTuesday</h3>
-<p><a href="./TidyTuesday.html" class="btn btn-outline-secondary">TidyTuesday</a></p>
+<section id="tidytuesday" class="level1">
+<h1>TidyTuesday</h1>
+<section id="section" class="level2">
+<h2 class="anchored" data-anchor-id="section">2026</h2>
+<section id="week-2" class="level3">
+<h3 class="anchored" data-anchor-id="week-2">Week 2</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./TidyTuesdayProjects/2026-Week 2/TidyTuesday-2026W2.html" class="btn btn-outline-secondary" width="300px" data-fig-align="left"><img src="TidyTuesdayProjects/plots/2026-week2.png" class="img-fluid figure-img"></a></p>
+<figcaption>2026-Week 2</figcaption>
+</figure>
+</div>
 
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -233,7 +244,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/johngrhm6\.github\.io\/personal_website_quarto\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

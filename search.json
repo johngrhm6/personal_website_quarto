@@ -35,18 +35,25 @@
     "text": "Find me online\nGitHub"
   },
   {
-    "objectID": "TidyTuesday.html",
-    "href": "TidyTuesday.html",
-    "title": "TidyTuesday",
-    "section": "",
-    "text": "```{r}\nlibrary(tidytuesdayR)\n\nlibrary(tidyverse)\n\ntt_data &lt;- tt_load(2026, week=2) \n\nafrica &lt;- tt_data$africa\n```\n\n\n```{r}\nafrica |&gt; \n  group_by(country) |&gt; \n  summarise(n=n_distinct(language)) |&gt; \n  ggplot(aes(x=reorder(country,-n),y=n))+\n  geom_col()+\n  theme_minimal()+\n  theme(\n    axis.title.x = element_blank(),\n    axis.title.y = element_blank(),\n    plot.background = element_blank(),\n    panel.grid = element_blank(),\n    axis.text.x = element_text(angle = 90)\n  )\n```"
-  },
-  {
     "objectID": "projects.html",
     "href": "projects.html",
     "title": "Projects",
     "section": "",
-    "text": "TidyTuesday\nTidyTuesday"
+    "text": "2026-Week 2"
+  },
+  {
+    "objectID": "projects.html#section",
+    "href": "projects.html#section",
+    "title": "Projects",
+    "section": "",
+    "text": "2026-Week 2"
+  },
+  {
+    "objectID": "TidyTuesdayProjects/2026-Week 2/TidyTuesday-2026W2.html",
+    "href": "TidyTuesdayProjects/2026-Week 2/TidyTuesday-2026W2.html",
+    "title": "TidyTuesday",
+    "section": "",
+    "text": "Image\n\nLoad Packages\n\nShow Code```{r}\nlibrary(tidytuesdayR)\nlibrary(tidyverse)\nlibrary(treemapify)\nlibrary(rnaturalearth)\nlibrary(rnaturalearthdata)\nlibrary(sf)\nlibrary(ggtext)\nlibrary(patchwork)\nlibrary(glue)\nlibrary(showtext)\n\n\n\nfont_add(family = \"Font Awesome 7\",regular =\"~/Documents/Code/R Studio/Fonts/fontawesome-free-7.3.1-desktop/otfs/Font Awesome 7 Brands-Regular-400.otf\")\nfont_add_google(family = \"Arimo\",name = \"Arimo\")\n\nbody_font &lt;- \"Arimo\"\nshowtext_auto()\nshowtext_opts(dpi=300)\n\ntext_col &lt;- \"#184e77\"\nhighlight_col &lt;- \"#76c893\"\nbg_col &lt;- \"white\"\n\n\nfamily_colours &lt;- c(\"Kxʼa\"=\"#d9ed92\",        \n 'Niger–Congo'=\"#b5e48c\",\n 'Afroasiatic'=\"#99d98c\" ,\n 'Indo-European'=\"#76c893\",\n 'Nilo-Saharan'=\"#52b69a\",\n 'Mande'=\"#34a0a4\",\n 'Portuguese'=\"#168aad\",\n 'Khoe–Kwadi'=\"#1a759f\", \n 'Afro-Asiatic'=\"#1e6091\",\n'Arabic-based'=\"#184e77\",\n'Kongo-based'=\"#80ffdb\",\n'English' =\"#72efdd\",\n'Austronesian'=\"#64dfdf\",\n'French'=\"#4ea8de\",    \n'Ubangian'=\"#5e60ce\",   \n'Tuu'=\"#6930c3\" )\n\n### Caption Function\n social_caption &lt;- function(\n            linkedin=\"johnmichaelgraham\",\n            github=\"johngrhm6\",\n            bluesky=\"johngrhm\",\n            icon_color = \"black\",\n            font_color = \"black\",\n            font_family = \"sans\") {\n  \n  icons_df &lt;- data.frame(\n        icons = c(\"&#xf08c;\", \"&#xe671;\", \"&#xf09b;\"),\n        socials = c(linkedin, bluesky, github)\n  )\n  icons_df &lt;- na.omit(icons_df)\n  \n  glue_icon &lt;- function(icon,social){\n    glue::glue(\n      \"&lt;span style='font-family:\\\"Font Awesome 7\\\"; \n      color:{icon_color};'&gt;{icon} &lt;/span&gt;&nbsp; &lt;span style='font-family:{font_family}; \n      color:{font_color};'&gt;{social} &lt;/span&gt;&emsp;\"\n    )\n  }\n\n  # Map over all icons\n  caption &lt;- purrr::map2(\n    .x = icons_df$icons,\n    .y = icons_df$socials,\n    .f = ~glue_icon(.x, .y)\n  ) |&gt; \n    purrr::as_vector() |&gt; \n    stringr::str_flatten()\n\n  return(caption)\n}\n\nsocial &lt;- social_caption(\n  icon_color = highlight_col,\n  font_color = text_col,\n  font_family = body_font\n)\n```\n\n\nData Wrangling\n\nShow Code```{r}\ntt_data &lt;- tt_load(2026, week=2)\n\nafrica &lt;- tt_data$africa\n\nafrica_sf &lt;- rnaturalearth::ne_countries(scale = \"medium\",continent = \"Africa\")\n\nafrica_families &lt;- africa |&gt; \n  group_by(country) |&gt; \n  mutate(TotalLanguageFamily = n_distinct(family),\n         Families = paste(unique(family),collapse = \"\\n\")) |&gt; \n  ungroup() |&gt; \n  select(country,TotalLanguageFamily,Families) |&gt; \n  distinct()\n\n\nafrica_families_mapped &lt;- africa_families|&gt; \n  mutate(country = case_match(.x = country,.default = country,\n    \"Ivory Coast\"~\"Côte d'Ivoire\",\n    \"Central African Republic\"~\"Central African Rep.\",\n    \"South Sudan\"~\"S. Sudan\",\n    \"Equatorial Guinea\"~\"Eq. Guinea\",\n    \"Cape Verde\"~\"Cabo Verde\",\n    \"Eswatini\"~\"eSwatini\",\n  )) |&gt; \n  right_join(africa_sf |&gt; select(name),by=c(\"country\"=\"name\")) \n```\n\n\nPlot\n\nShow Code```{r fig.height= 7,fig.width=10}\nsubtitle &lt;- glue(\"There are over &lt;span style='color:{highlight_col}'&gt;**{n_distinct(africa$family)}**&lt;/span&gt; distinct language families across the continent of Africa\")\n\nmap &lt;- africa_families_mapped |&gt; \n  ggplot()+\n  geom_sf(aes(geometry=geometry,fill=`TotalLanguageFamily`))+\n  scale_fill_gradient(low = \"#d9ed92\",high = \"#34a0a4\",na.value = \"white\")+\n  labs(fill = \"Language Families\",\n       subtitle = subtitle,\n       caption = social)+\n  theme_minimal(base_size = 10)+\n  theme(plot.background = element_rect(fill = \"white\",colour = \"white\"),\n        plot.margin=margin(2,2,2,2,unit = \"cm\"),\n        plot.caption = element_textbox_simple(),\n        panel.grid = element_blank(),\n        plot.subtitle = element_textbox_simple(colour = family_colours[8],hjust = 0.5,\n                                        lineheight = 0.5,face = \"bold\",\n                                        size = 16),\n        legend.position = \"none\",\n        axis.title = element_blank(),\n        axis.text = element_blank(),\n        panel.background = element_rect(fill = \"white\",colour = \"white\"))\n\n\n\nbar &lt;- africa_families |&gt; \n  group_by(TotalLanguageFamily) |&gt; \n  summarise(n=n()) |&gt; \n  ggplot(aes(x=factor(TotalLanguageFamily),y=n,fill=TotalLanguageFamily))+\n  geom_col(width = 0.6)+\n  geom_text(aes(label=n))+\n  scale_fill_gradient(low = \"#d9ed92\",high = \"#34a0a4\",na.value = \"white\")+\n  theme_minimal(base_size = 10)+\n  scale_x_discrete(labels = c(\"1 family\",\"2 families\",\"3 families\",\"4 families\",\"5 families\"))+\n  scale_y_continuous(expand = c(0.2,0))+\n  theme(axis.title = element_blank(),\n        axis.text.y = element_blank(),\n        axis.text.x = element_text(angle = 90),\n        legend.position = \"none\",panel.grid = element_blank()\n        )\n\n\n\np &lt;- map+inset_element(bar,left = 0.2,right = 0.5,top = 0.5,bottom = 0.3,align_to = \"full\")\n\np\n```\n\n\n\n\n\n\n\nSave Plot\n\nShow Code```{r}\ngetwd()\nggsave(plot=p,filename =\"2026-week2.png\",width = 10,height = 7 )\n```\n\n[1] \"/Users/johngraham/Documents/Code/R Studio/JG Website/Website/TidyTuesdayProjects/2026-Week 2\""
   },
   {
     "objectID": "index.html",
