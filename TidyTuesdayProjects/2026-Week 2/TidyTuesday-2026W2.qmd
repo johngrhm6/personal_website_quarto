@@ -18,7 +18,7 @@ execute:
   echo: fenced
 ---
 
-![Image](../plots/2026-week2.png)
+![Image](../plots/2026-week2.png){width=300px height=450px}
 
 
 ### Load Packages

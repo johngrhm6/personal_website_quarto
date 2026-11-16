@@ -1,0 +1,166 @@
+---
+title: "TidyTuesday-2026-W5"
+format: 
+  html:
+    toc: true
+    toc-depth: 5
+    code-link: true
+    code-fold: true
+    code-summary: "Show Code"
+    code-tools: true
+editor_options: 
+  chunk_output_type: inline
+execute: 
+  warning: false
+  echo: fenced
+---
+
+[Edible Plants](../plots/2026/week5/2026_11_16_22_19_25.618218.png){width=300px height=450px}
+
+### Load Packages
+
+```{r message=FALSE}
+library(tidyverse)
+library(tidytuesdayR)
+library(skimr)
+library(camcorder)
+library(ggtext)
+library(glue)
+library(showtext)
+source(file = "~/Documents/Code/R Studio/Utilities/fonts.R")
+source(file = "~/Documents/Code/R Studio/Utilities/caption.R")
+```
+
+### Fonts and Colors
+
+```{r}
+primary <-  "#386641"
+secondary <- "#bc4749"
+
+font_add_google(name = "Nunito",family = "Nunito")
+f1 <- "Nunito"
+
+
+caption <- create_social_caption(tt_year = "2026",tt_week = "5",source_text = "Edible Plants Database",note_text = "Test")
+
+setup_fonts()
+```
+
+
+### Load Data
+
+```{r message=FALSE}
+
+tt_data <- tt_load(2026, week=5)
+edible_plants_raw <- tt_data$edible_plants
+
+gg_record(dir = file.path("~/Documents/Code/R Studio/JG Website/Website/TidyTuesdayProjects/plots",
+                          "2026","week5"),device = "png",width = 5,height = 7,dpi = 300,units = "in")
+```
+
+### Explore Data
+
+```{r}
+
+edible_plants_raw |> 
+  glimpse()
+
+edible_plants_raw |> 
+  skim()
+
+```
+
+### Tidy Data
+
+```{r}
+
+cleaned_data <- edible_plants_raw |>
+  filter(!is.na(temperature_growing)) |> 
+  filter(!is.na(temperature_germination)) |> 
+  select(cultivation,temperature_growing,temperature_germination) |> 
+  separate_wider_delim(temperature_growing,delim = "-",
+                       names = c("min_temp_grow","max_temp_grow"),too_few = "align_start") |> 
+  separate_wider_delim(temperature_germination,delim = "-",names = c("min_temp_germination","max_temp_germination"),too_few = "align_start") |> 
+  mutate(max_temp_germination = ifelse(is.na(max_temp_germination),
+                                       min_temp_germination,max_temp_germination),
+         max_temp_grow = ifelse(is.na(max_temp_grow)|max_temp_grow=="",min_temp_grow,max_temp_grow)) |> 
+  filter(cultivation!="Miscellaneous") |> 
+  mutate(cultivation = ifelse(cultivation=="Solanum","Solanaceae",cultivation)) |> 
+  group_by(cultivation) |> 
+  summarise(ave_min_temp_grow = mean(as.numeric(min_temp_grow)),
+            ave_max_temp_grow = mean(as.numeric(max_temp_grow)),
+            ave_min_temp_germ = mean(as.numeric(min_temp_germination)),
+            ave_max_temp_germ = mean(as.numeric(max_temp_germination)),
+            range_temp_grow = ave_max_temp_grow - ave_min_temp_grow,
+            range_temp_germ = ave_max_temp_germ - ave_min_temp_germ,
+            sample_size = n()
+            ) |> 
+  mutate(id = row_number())
+
+
+```
+
+### Plot
+
+```{r}
+
+sb <- glue("Showing range <span style='color:{primary} font-weight:\"bold\";'>Grow Temperature</span>
+           and <span style='color:{secondary};'> Germ Temperature</span>
+           ")
+
+
+y_axis_labels = unique(cleaned_data$cultivation)
+y_axis_id = unique(cleaned_data$id)
+
+
+cleaned_data |>  
+  ggplot()+
+  geom_segment(aes(x=ave_min_temp_grow,
+                   xend = ave_max_temp_grow,
+                   y=id),
+               linewidth = 4,
+               lineend = "round",
+               colour = primary,
+               alpha = 0.4)+
+    geom_segment(aes(x=ave_min_temp_germ,
+                   xend = ave_max_temp_germ,
+                   y=id),
+                 linewidth = 4,
+                 lineend = "round",
+               colour = secondary,alpha = 0.7)+
+  geom_point(aes(x=ave_min_temp_grow,
+                 y=id),
+             fill = "#2a9d8f",
+             size = 2)+
+  labs(title = "Temperature ranges for different edible plant groups",
+        subtitle = sb,
+       caption = caption)+
+  scale_y_continuous(labels = y_axis_labels,breaks = seq(1,7,1))+
+  scale_x_continuous(breaks = seq(0,45,5),
+                     labels = paste( seq(0,45,5),"\u00B0","C",sep = ""),
+                     expand = expansion(mult = c(0.2,0.2)))+
+  theme_minimal(base_family = f1)+
+  theme(plot.caption = element_markdown(
+    size=rel(0.6),
+    lineheight = 1.5,
+    hjust = 0,
+    margin = margin(t=20,b=10)),
+    plot.subtitle = element_markdown(margin = margin(t=10,b=10),lineheight = 1.3,hjust = 0,size = rel(0.8)),
+    plot.margin = margin(25,25,25,25),
+    plot.title = element_text(hjust = 0,size=rel(0.9)),
+    plot.background = element_rect(fill="#fefae0",colour = "#fefae0"),
+    panel.background = element_rect(fill="#fefae0",colour = "#fefae0"),
+    panel.grid = element_blank(),
+    axis.title = element_blank()
+    
+    )
+
+
+
+```
+
+
+
+
+
+

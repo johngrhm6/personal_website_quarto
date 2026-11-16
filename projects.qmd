@@ -1,9 +1,24 @@
 ---
 title: "Projects"
 page-layout: full
+format: 
+  html:
+    css: styles.css
 ---
 
-### TidyTuesday
+# TidyTuesday
 
-[TidyTuesday](TidyTuesday.qmd){.btn .btn-outline-secondary}
+::: {.projects-list}
 
+## 2026
+### Week 2
+
+[![2026-Week 2](TidyTuesdayProjects/plots/2026-week2.png){.project-thumb}](TidyTuesdayProjects/2026-Week 2/TidyTuesday-2026W2.qmd)
+
+
+## 2026
+### Week 4
+
+[![2026-Week 4](TidyTuesdayProjects/plots/2026/week4/recording/2026_11_14_13_04_02.785870.png){.project-thumb}](TidyTuesdayProjects/2026-Week 4/TidyTuesday-2026-W4.qmd)
+
+:::
