@@ -16,9 +16,14 @@ format:
 [![2026-Week 2](TidyTuesdayProjects/plots/2026-week2.png){.project-thumb}](TidyTuesdayProjects/2026-Week 2/TidyTuesday-2026W2.qmd)
 
 
-## 2026
 ### Week 4
 
 [![2026-Week 4](TidyTuesdayProjects/plots/2026/week4/recording/2026_11_14_13_04_02.785870.png){.project-thumb}](TidyTuesdayProjects/2026-Week 4/TidyTuesday-2026-W4.qmd)
+
+### Week 5
+
+[![2026-Week 5](TidyTuesdayProjects/plots/2026/week5/2026_11_16_22_35_30.208591.png){.project-thumb}](TidyTuesdayProjects/2026-Week 4/TidyTuesday-2026-W5.qmd)
+
+
 
 :::
